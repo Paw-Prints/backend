@@ -15,6 +15,23 @@ const getToken = async () => {
   }
 };
 
+//parse data from petFinder api
+const parseData = async data => {
+  const pets = [];
+  for (let i = 0; i < data.animals.length; i++) {
+    const pet = {};
+    pet["images"] = data.animals[i].photos;
+    pet["listingLink"] = data.animals[i].url;
+    pet["description"] = data.animals[i].description;
+    pet["age"] = data.animals[i].age;
+    pet["name"] = data.animals[i].name;
+    pet["attributes"] = data.animals[i].attributes;
+
+    pets.push(pet);
+  }
+  return pets;
+};
+
 // grabs data from petFinder api
 const getLocationAndInfo = async (location, breed) => {
   try {
@@ -37,5 +54,6 @@ const getLocationAndInfo = async (location, breed) => {
 };
 
 module.exports = {
-  getLocationAndInfo
+  getLocationAndInfo,
+  parseData
 };

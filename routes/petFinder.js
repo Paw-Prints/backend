@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { getLocationAndInfo } = require("../helpers/helpers");
+const { getLocationAndInfo, parseData } = require("../helpers/helpers");
 
 /**
  * POST: get backs breed and location from frontend
@@ -14,16 +14,15 @@ router.post("/", async (req, res) => {
     // grab all the data from petFinder Api {dog data + shelters nearby}
     const petFinderData = await getLocationAndInfo(location, breed);
 
-    console.log("server api", petFinderData);
-
     //parse data
+    const parsedPetsData = await parseData(petFinderData);
 
     // return data back to frontend
     if (petFinderData === undefined) {
       return res.status(400).json({ msg: "No dogs matched that breed :(." });
     }
 
-    return res.status(200).json(petFinderData);
+    return res.status(200).json(parsedPetsData);
   } catch (err) {
     res.status(500).json({ msg: "Servor Error." });
     console.error(err);
