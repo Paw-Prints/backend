@@ -18,7 +18,9 @@ const sampleReturn = {
     // Pets found with 10 objects in array
     pets: [
         {
+            // 100 px - mobile
             smallImage: string,
+            // 300 px - tablet, desktop
             mediumImage: string,
             name: string,
             description: string,
@@ -31,6 +33,74 @@ const sampleReturn = {
             cats: boolean
         }
     ]
+};
+
+// Weight: pounds, food: cups per day, lifespan: years, healthIssues: top health defects and their associated cost
+// Food based on this chart: https://www.petmd.com/blogs/nutritionnuggets/dr-coates/2015/july/are-you-feeding-your-dog-right-amount-32905
+
+// Average annual vet cost?
+
+const dogBreeds = {
+    "Labrador Retriever": {
+        weight: 67.5,
+        food: 3.375,
+        lifespan: 12,
+        healthIssues: ""
+    },
+    "German Shepherd Dog": {
+        weight: 68.5,
+        food: 3.425,
+        lifespan: 11,
+        healthIssues: ""
+    },
+    "Golden Retriever": {
+        weight: 65,
+        food: 3.25,
+        lifespan: 11,
+        healthIssues: ""
+    },
+    "French Bulldog": {
+        weight: 22,
+        food: 1.5,
+        lifespan: 12,
+        healthIssues: ""
+    },
+    "Australian Shepherd": {
+        weight: 52.5,
+        food: 2.67,
+        lifespan: 14,
+        healthIssues: ""
+    },
+    "Beagle": {
+        weight: 22,
+        food: 1.5,
+        lifespan: 27,
+        healthIssues: ""
+    },
+    "Poodle": {
+        weight: 57.5,
+        food: 2.875,
+        lifespan: 13.5,
+        healthIssues: ""
+    },
+    "Siberian Husky": {
+        weight: 47.5,
+        food: 2.53,
+        lifespan: 13.5,
+        healthIssues: ""
+    },
+    "Yorkshire Terrier": {
+        weight: 6,
+        food: 0.5,
+        lifespan: 14.5,
+        healthIssues: ""
+    },
+    "Pembroke Welsh Corgi": {
+        weight: 26.5,
+        food: 1.55,
+        lifespan: 13.5,
+        healthIssues: ""
+    }
 };
 
 // Add average inflation of top 15 cities to calculate costs based on CPI.

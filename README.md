@@ -4,6 +4,8 @@ The live deploy can be found [here](https://paw-prints.herokuapp.com/) on Heroku
 
 Uses Node.js with Express, integrating with Nationwide's API and the PetFinder API.
 
+Callback URL: `https://paw-prints.herokuapp.com/api/callback`
+
 ## To Use
 
 Setup a `.env` file with the following variables:
