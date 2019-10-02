@@ -22,7 +22,7 @@ const getLocationAndInfo = async (location, breed) => {
     const token = await getToken();
 
     const pets = await axios(
-      `https://api.petfinder.com/v2/animals?breed=${breed}&location=${location}&limit=10&sort=distance`,
+      `https://api.petfinder.com/v2/animals?breed=${breed}&location=${location}&limit=10&sort=distance&status=adoptable`,
       {
         headers: {
           Authorization: `Bearer ${token}`

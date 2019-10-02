@@ -19,6 +19,10 @@ router.post("/", async (req, res) => {
     //parse data
 
     // return data back to frontend
+    if (petFinderData === undefined) {
+      return res.status(400).json({ msg: "No dogs matched that breed :(." });
+    }
+
     return res.status(200).json(petFinderData);
   } catch (err) {
     res.status(500).json({ msg: "Servor Error." });
