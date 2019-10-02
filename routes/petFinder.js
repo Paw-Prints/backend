@@ -15,14 +15,23 @@ router.post("/", async (req, res) => {
     const petFinderData = await getLocationAndInfo(location, breed);
 
     //parse data
-    const parsedPetsData = await parseData(petFinderData);
+    const pets = await parseData(petFinderData);
 
     // return data back to frontend
     if (petFinderData === undefined) {
       return res.status(400).json({ msg: "No dogs matched that breed :(." });
     }
 
-    return res.status(200).json(parsedPetsData);
+    return res.status(200).json({
+      costs: {
+        monthlyCost: 0,
+        lifetimeCost: 0,
+        grooming: 0,
+        food: 0,
+        insurance: 0
+      },
+      pets
+    });
   } catch (err) {
     res.status(500).json({ msg: "Servor Error." });
     console.error(err);
