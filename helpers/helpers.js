@@ -25,6 +25,11 @@ const parseData = async data => {
     pet["description"] = data.animals[i].description;
     pet["age"] = data.animals[i].age;
     pet["name"] = data.animals[i].name;
+
+    if (Number(pet["name"]) === Number) {
+      pet["name"] = "Uknown Name: Dog";
+    }
+
     pet["contact"] = data.animals[i].contact;
     pet["breeds"] = data.animals[i].breeds;
     pet["distance"] = data.animals[i].distance;
@@ -49,6 +54,10 @@ const getLocationAndInfo = async (location, breed) => {
         }
       }
     );
+
+    if (pet.data === undefined) {
+      return undefined;
+    }
 
     return pets.data;
   } catch (err) {
