@@ -25,6 +25,9 @@ const parseData = async data => {
     pet["description"] = data.animals[i].description;
     pet["age"] = data.animals[i].age;
     pet["name"] = data.animals[i].name;
+    pet["contact"] = data.animals[i].contact;
+    pet["breeds"] = data.animals[i].breeds;
+    pet["distance"] = data.animals[i].distance;
     pet["attributes"] = data.animals[i].attributes;
 
     pets.push(pet);
