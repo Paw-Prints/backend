@@ -38,7 +38,7 @@ const parseData = async data => {
 // grabs data from petFinder api
 const getLocationAndInfo = async (location, breed) => {
   try {
-    console.log("helper", location, breed);
+    //console.log("helper", location, breed);
     const token = await getToken();
 
     const pets = await axios(
