@@ -94,8 +94,12 @@ const createDogInfo = (dogs) => {
     finalObject = {}
 
     for(const [key, value] of Object.entries(dogs)){
+        // Food calculated by multiplying daily eaten in cups, times number of days. This is divided by 4 (4 cups per pound of dog food on average), times $2.19, the average cost of dog food nationally
+        let monthlyFood = parseInt( (((value.food * 30) / 4) * 2.19).toFixed());
+        let annualFood = parseInt( (((value.food * 365) / 4) * 2.19).toFixed());
+
         monthly = {
-            food: parseInt((value.food * 30).toFixed()),
+            food: monthlyFood,
             grooming: ((value.grooming * 53) / 12),
             toysTreats: parseInt((55/12).toFixed()),
             medical: {
@@ -103,13 +107,13 @@ const createDogInfo = (dogs) => {
                 without: 103.7
             },
             total: {
-                withInsurance: ( parseInt((value.food * 30).toFixed()) + ((value.grooming * 53) / 12) + parseInt((55/12).toFixed()) +  parseInt(((103.7 * 0.2) + value.insurance).toFixed())),
-                without: ( parseInt((value.food * 30).toFixed()) + ((value.grooming * 53) / 12) + parseInt((55/12).toFixed()) + 103.7 )
+                withInsurance: ( monthlyFood + ((value.grooming * 53) / 12) + parseInt((55/12).toFixed()) +  parseInt(((103.7 * 0.2) + value.insurance).toFixed())),
+                without: ( monthlyFood + ((value.grooming * 53) / 12) + parseInt((55/12).toFixed()) + 103.7 )
             }
         };
 
         annual = {
-            food: parseInt((value.food * 365).toFixed()),
+            food: annualFood,
             grooming: (value.grooming * 53),
             toysTreats: 55,
             medical: {
@@ -117,8 +121,8 @@ const createDogInfo = (dogs) => {
                 without: 1037
             },
             total: {
-                withInsurance: ( parseInt((value.food * 365).toFixed()) + (value.grooming * 53) + 55 + parseInt(((1037 * 0.2) + value.insurance).toFixed()) ),
-                without: ( parseInt((value.food * 365).toFixed()) + (value.grooming * 53) + 55 + 1037 )
+                withInsurance: ( annualFood + (value.grooming * 53) + 55 + parseInt(((1037 * 0.2) + value.insurance).toFixed()) ),
+                without: ( annualFood + (value.grooming * 53) + 55 + 1037 )
             }
         };
 
