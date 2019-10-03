@@ -24,13 +24,7 @@ router.post("/", async (req, res) => {
     }
 
     return res.status(200).json({
-      costs: {
-        monthlyCost: 0,
-        lifetimeCost: 0,
-        grooming: 0,
-        food: 0,
-        insurance: 0
-      },
+      costs: finalDogInfo,
       pets
     });
   } catch (err) {
