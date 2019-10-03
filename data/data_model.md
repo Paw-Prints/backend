@@ -39,23 +39,25 @@ Within the `costs` object, there is a nested object, `lifetimeCost`. Its keys re
 
 In the `pets` individual objects, the nested array `images` holds an object per photo provided by PetFinder for an individual pet, with the object containing four size (small, medium, large, and full) image URL strings. 
 
+`contact` contains an object of contact information for reaching out to the shelter or organization the user can adopt this individual pet from. `breeds` contains an object of information about what primary and secondary breed the individual pet is and if they are a mixed breed dog.
+
 The nested object `attributes` contains keys referencing qualities of the individual pet, as Boolean values (true, false, or null if not provided).
 
 ---
 ```
 {
     costs: {
-        monthlyCost: integer,
+        monthlyCost: INTEGER,
         lifetimeCost: {
-            Baby: 1.00,
-            Young: 0.75,
-            Adult: 0.50,
-            Senior: 0.25
+            Baby: INTEGER,
+            Young: INTEGER,
+            Adult: INTEGER,
+            Senior: INTEGER
 
         },
-        grooming: integer,
-        food: integer,
-        insurance: integer
+        grooming: INTEGER,
+        food: INTEGER,
+        insurance: INTEGER
     },
 
     pets: [
@@ -66,21 +68,36 @@ The nested object `attributes` contains keys referencing qualities of the indivi
                     medium: STRING URL of 300px image,
                     large: STRING URL,
                     full: STRING URL
-                }
+                },
             ],
             listingLink: STRING URL of where the pet is listed
             description: STRING,
             age: STRING,
             name: STRING,
-            contact: STRING,
-            breed: STRING,
+            contact: {
+                email: STRING,
+                phone: STRING,
+                address: {
+                    address1: STRING or null,
+                    address2: STRING or null,
+                    city: STRING,
+                    state: STRING,
+                    postcode: STRING,
+                    country: STRING
+            },
+            breeds: {
+                primary: STRING (primary breed),
+                secondary: STRING or null (secondary breed, or null if not known),
+                mixed: BOOLEAN (if a mixed breed dog),
+                unknown: BOOLEAN
+            },
             distance: INTEGER,
             attributes: {
-                "spayed_neutered": BOOLEAN (true, false or null if not provided),
-                "house_trained": BOOLEAN,
-                "declawed": BOOLEAN,
-                "special_needs": BOOLEAN,
-                "shots_current": BOOLEAN
+                spayed_neutered: BOOLEAN (true, false or null if not provided),
+                house_trained: BOOLEAN,
+                declawed: BOOLEAN,
+                special_needs: BOOLEAN,
+                shots_current: BOOLEAN
             }
         }
     ]
