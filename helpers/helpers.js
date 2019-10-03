@@ -23,6 +23,7 @@ const parseData = async data => {
     pet["images"] = data.animals[i].photos; //array of photos with obj of sizes
     pet["listingLink"] = data.animals[i].url; // url linking them to dog listing
     pet["description"] = data.animals[i].description; //description of dog
+    pet["id"] = data.animals[i].id; //name of dog
     pet["age"] = data.animals[i].age; // age of dog
     pet["name"] = data.animals[i].name; //name of dog
 
