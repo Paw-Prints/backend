@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
     const pets = await parseData(petFinderData);
 
     return res.status(200).json({
-      costs: finalDogInfo.breed,
+      costs: finalDogInfo[`${breed}`],
       pets
     });
   } catch (err) {
