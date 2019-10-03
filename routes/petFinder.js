@@ -3,7 +3,7 @@ const router = express.Router();
 const { getLocationAndInfo, parseData } = require("../helpers/helpers");
 
 /**
- * POST: get backs breed and location from frontend
+ * POST: get backs breed and location + cost from frontend
  * @param arr type (int, arr, str, etc) : What it expects
  * @returns {arr} type : What it returns
  */
