@@ -20,20 +20,21 @@ const parseData = async data => {
   const pets = [];
   for (let i = 0; i < data.animals.length; i++) {
     const pet = {};
-    pet["images"] = data.animals[i].photos;
-    pet["listingLink"] = data.animals[i].url;
-    pet["description"] = data.animals[i].description;
-    pet["age"] = data.animals[i].age;
-    pet["name"] = data.animals[i].name;
+    pet["images"] = data.animals[i].photos; //array of photos with obj of sizes
+    pet["listingLink"] = data.animals[i].url; // url linking them to dog listing
+    pet["description"] = data.animals[i].description; //description of dog
+    pet["age"] = data.animals[i].age; // age of dog
+    pet["name"] = data.animals[i].name; //name of dog
 
     if (Number(pet["name"]) === Number) {
+      //if dog has a number for name, give default name
       pet["name"] = "Uknown Name: Dog";
     }
 
-    pet["contact"] = data.animals[i].contact;
-    pet["breeds"] = data.animals[i].breeds;
-    pet["distance"] = data.animals[i].distance;
-    pet["attributes"] = data.animals[i].attributes;
+    pet["contact"] = data.animals[i].contact; //contact info for shelter
+    pet["breeds"] = data.animals[i].breeds; //types of breeds the dog is
+    pet["distance"] = data.animals[i].distance; //distance from the location inputed
+    pet["attributes"] = data.animals[i].attributes; // small facts about dog
 
     pets.push(pet);
   }
