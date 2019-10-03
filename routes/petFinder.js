@@ -14,13 +14,18 @@ router.post("/", async (req, res) => {
     // grab all the data from petFinder Api {dog data + shelters nearby}
     const petFinderData = await getLocationAndInfo(location, breed);
 
-    //parse data
-    const pets = await parseData(petFinderData);
-
     // return data back to frontend
     if (petFinderData === undefined) {
-      return res.status(400).json({ msg: "No dogs matched that breed :(." });
+      return res
+        .status(400)
+        .json({
+          msg:
+            "Location is incorrect, please enter a correct city, state or zipcode."
+        });
     }
+
+    //parse data
+    const pets = await parseData(petFinderData);
 
     return res.status(200).json({
       costs: {
