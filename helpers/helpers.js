@@ -55,10 +55,6 @@ const getLocationAndInfo = async (location, breed) => {
       }
     );
 
-    if (pet.data === undefined) {
-      return undefined;
-    }
-
     return pets.data;
   } catch (err) {
     console.error(err);
