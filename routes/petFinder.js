@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getLocationAndInfo, parseData } = require("../helpers/helpers");
+const finalDogInfo = require('../data/petData');
 
 /**
  * POST: get backs breed and location + cost from frontend
@@ -28,17 +29,11 @@ router.post("/", async (req, res) => {
     const pets = await parseData(petFinderData);
 
     return res.status(200).json({
-      costs: {
-        monthlyCost: 0,
-        lifetimeCost: 0,
-        grooming: 0,
-        food: 0,
-        insurance: 0
-      },
+      costs: finalDogInfo.breed,
       pets
     });
   } catch (err) {
-    res.status(500).json({ msg: "Servor Error." });
+    res.status(500).json({ msg: "Server Error." });
     console.error(err);
   }
 });
