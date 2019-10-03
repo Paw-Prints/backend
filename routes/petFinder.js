@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getLocationAndInfo, parseData } = require("../helpers/helpers");
+const finalDogInfo = require('../data/petData');
 
 /**
  * POST: get backs breed and location + cost from frontend

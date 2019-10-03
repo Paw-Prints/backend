@@ -1,73 +1,10 @@
 
+// This file exports finalDogInfo, an object containing the calculated estimated costs for each breed
+
 // Weight: pounds, food: cups per day, lifespan: years, grooming: times per year, healthIssues: top health defects and their associated cost
 // Food based on this chart: https://www.petmd.com/blogs/nutritionnuggets/dr-coates/2015/july/are-you-feeding-your-dog-right-amount-32905
 
 // Average annual vet cost?
-
-sampleObject = {
-    monthly: {
-        total: 0,
-        food: 0,
-        grooming: 0,
-        toysTreats: 0,
-        medical: {
-            withInsurance: 0,
-            without: 0
-        }
-    },
-    annual: {
-        total: 0,
-        food: 0,
-        grooming: 0,
-        toysTreats: 0,
-        medical: {
-            withInsurance: 0,
-            without: 0
-        }
-    },
-    lifetime: {
-        Baby: {
-            total: 0,
-            food: 0,
-            grooming: 0,
-            toysTreats: 0,
-            medical: {
-                withInsurance: 0,
-                without: 0
-            }
-        },
-        Young: {
-            total: 0,
-            food: 0,
-            grooming: 0,
-            toysTreats: 0,
-            medical: {
-                withInsurance: 0,
-                without: 0
-            }
-        },
-        Adult: {
-            total: 0,
-            food: 0,
-            grooming: 0,
-            toysTreats: 0,
-            medical: {
-                withInsurance: 0,
-                without: 0
-            }
-        },
-        Senior: {
-            total: 0,
-            food: 0,
-            grooming: 0,
-            toysTreats: 0,
-            medical: {
-                withInsurance: 0,
-                without: 0
-            }
-        }
-    }
-};
 
 const dogBreeds = {
     "Labrador Retriever": {
@@ -165,7 +102,11 @@ const createDogInfo = (dogs) => {
             medical: {
                 withInsurance: parseInt(((103.7 * 0.2) + value.insurance).toFixed()),
                 without: 103.7
-            } 
+            },
+            total: {
+                withInsurance: ( parseInt((value.food * 30).toFixed()) + ((value.grooming * 53) / 12) + parseInt((55/12).toFixed()) +  parseInt(((103.7 * 0.2) + value.insurance).toFixed())),
+                without: ( parseInt((value.food * 30).toFixed()) + ((value.grooming * 53) / 12) + parseInt((55/12).toFixed()) + 103.7 )
+            }
         };
 
         annual = {
@@ -175,34 +116,91 @@ const createDogInfo = (dogs) => {
             medical: {
                 withInsurance: parseInt(((1037 * 0.2) + value.insurance).toFixed()),
                 without: 1037
-            } 
+            },
+            total: {
+                withInsurance: ( parseInt((value.food * 365).toFixed()) + (value.grooming * 53) + 55 + parseInt(((1037 * 0.2) + value.insurance).toFixed()) ),
+                without: ( parseInt((value.food * 365).toFixed()) + (value.grooming * 53) + 55 + 1037 )
+            }
         };
 
-        // total: 0,
-        // food: 0,
-        // grooming: 0,
-        // toysTreats: 0,
-        // medical: {
-        //     withInsurance: 0,
-        //     without: 0
-        // }
-
+        const lifetimeTotalWithInsurance = annual.total.withInsurance * value.lifespan;
+        const lifetimeTotalWithout = annual.total.without * value.lifespan;
+        const lifetimeFood = annual.food * value.lifespan;
+        const lifetimeGrooming = annual.grooming * value.lifespan;
+        const lifetimeToysTreats = 55 * value.lifespan;
+        const lifeTimeMedicalWithInsurance = (annual.medical.withInsurance * value.lifespan) + 3000;
+        const lifetimeMedicalWithout = (annual.medical.without * value.lifespan) + 3000;
 
         lifetime = {
-            Baby: {},
-            Young: {},
-            Adult: {},
-            Senior: {}
+            Baby: {
+                total: {
+                    withInsurance: lifetimeTotalWithInsurance + 200,
+                    without: (lifetimeTotalWithout + 200)
+                },
+                food: lifetimeFood,
+                grooming: lifetimeGrooming,
+                toysTreats: lifetimeToysTreats,
+                medical: {
+                    withInsurance: lifeTimeMedicalWithInsurance,
+                    without: lifetimeMedicalWithout
+                },
+                miscellaneous: (45 * value.lifespan)
+            },
+            Young: {
+                total: {
+                    withInsurance: parseInt((lifetimeTotalWithInsurance * 0.75).toFixed()),
+                    without: parseInt((lifetimeTotalWithout * 0.75).toFixed())
+                },
+                food: parseInt((lifetimeFood * 0.75).toFixed()),
+                grooming: parseInt((lifetimeGrooming * 0.75).toFixed()),
+                toysTreats: parseInt((lifetimeToysTreats * 0.75).toFixed()),
+                medical: {
+                    withInsurance: parseInt((lifeTimeMedicalWithInsurance * 0.75).toFixed()),
+                    without: parseInt((lifetimeMedicalWithout * 0.75).toFixed())
+                },
+                miscellaneous: parseInt(((45 * value.lifespan) * 0.75).toFixed())
+            },
+            Adult: {
+                total: {
+                    withInsurance: parseInt((lifetimeTotalWithInsurance * 0.5).toFixed()),
+                    without: parseInt((lifetimeTotalWithout * 0.5).toFixed()),
+                },
+                food: parseInt((lifetimeFood * 0.5).toFixed()),
+                grooming: parseInt((lifetimeGrooming * 0.5).toFixed()),
+                toysTreats: parseInt((lifetimeToysTreats * 0.5).toFixed()),
+                medical: {
+                    withInsurance: parseInt((lifeTimeMedicalWithInsurance * 0.5).toFixed()),
+                    without: parseInt((lifetimeMedicalWithout * 0.5).toFixed())
+                },
+                miscellaneous: parseInt(((45 * value.lifespan) * 0.5).toFixed())
+            },
+            Senior: {
+                total: {
+                    withInsurance: parseInt((lifetimeTotalWithInsurance * 0.25).toFixed()),
+                    without: parseInt((lifetimeTotalWithout * 0.25).toFixed())
+                },
+                food: parseInt((lifetimeFood * 0.25).toFixed()),
+                grooming: parseInt((lifetimeGrooming * 0.25).toFixed()),
+                toysTreats: parseInt((lifetimeToysTreats * 0.25).toFixed()),
+                medical: {
+                    withInsurance: parseInt((lifeTimeMedicalWithInsurance * 0.25).toFixed()),
+                    without: parseInt((lifetimeMedicalWithout * 0.25).toFixed())
+                },
+                miscellaneous: parseInt(((45 * value.lifespan) * 0.25).toFixed())
+            }
         };
 
         finalObject[key] = {
             monthly: monthly,
             annual: annual,
-            lifetime: lifetime
+            lifetime: lifetime,
+            healthIssues: value.healthIssues
         };
     }
 
-    console.log(finalObject)
+    return finalObject
 };
 
-createDogInfo(dogBreeds);
+const finalDogInfo = createDogInfo(dogBreeds);
+
+module.exports = finalDogInfo;
