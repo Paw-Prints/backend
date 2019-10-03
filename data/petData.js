@@ -1,40 +1,4 @@
 
-// API POST request example syntax
-
-const sampleSend = {
-    "breed": "string (must match one of 10 dog breed options exactly)",
-    "location": integer
-};
-
-const sampleReturn = {
-    // Estimated Costs
-    costs: {
-        monthlyCost: integer,
-        lifetimeCost: integer,
-        grooming: integer,
-        food: integer,
-        insurance: integer
-    },
-    // Pets found with 10 objects in array
-    pets: [
-        {
-            // 100 px - mobile
-            smallImage: string,
-            // 300 px - tablet, desktop
-            mediumImage: string,
-            name: string,
-            description: string,
-            listingLink: string,
-            age: string,
-            housetrained: boolean,
-            neutered: boolean,
-            children: boolean,
-            dogs: boolean,
-            cats: boolean
-        }
-    ]
-};
-
 // Weight: pounds, food: cups per day, lifespan: years, grooming: times per year, healthIssues: top health defects and their associated cost
 // Food based on this chart: https://www.petmd.com/blogs/nutritionnuggets/dr-coates/2015/july/are-you-feeding-your-dog-right-amount-32905
 
