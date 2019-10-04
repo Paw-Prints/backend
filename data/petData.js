@@ -1,4 +1,5 @@
 
+
 // This file exports finalDogInfo, an object containing the calculated estimated costs for each breed
 
 
@@ -95,101 +96,106 @@ const createDogInfo = (dogs) => {
 
     for(const [key, value] of Object.entries(dogs)){
         // Food calculated by multiplying daily eaten in cups, times number of days. This is divided by 4 (4 cups per pound of dog food on average), times $2.19, the average cost of dog food nationally
-        let monthlyFood = parseInt( (((value.food * 30) / 4) * 2.19).toFixed());
-        let annualFood = parseInt( (((value.food * 365) / 4) * 2.19).toFixed());
+        const monthlyFood = (((value.food * 30) / 4) * 2.19);
+        const annualFood = (((value.food * 365) / 4) * 2.19);
+        const annualGrooming = (value.grooming * 53);
+        const annualMedicalInsurance = ((1037 * 0.2) + value.insurance);
+        const annualWithInsurance = ( annualFood + (value.grooming * 53) + 55 + ((1037 * 0.2) + value.insurance) );
+        const annualWithout = ( annualFood + (value.grooming * 53) + 55 + 1037 );
+
 
         monthly = {
-            food: monthlyFood,
-            grooming: ((value.grooming * 53) / 12),
-            toysTreats: parseInt((55/12).toFixed()),
+            food: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(monthlyFood),
+            grooming: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(annualGrooming/12),
+            toysTreats: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((55/12)),
             medical: {
-                withInsurance: parseInt(((103.7 * 0.2) + value.insurance).toFixed()),
-                without: 103.7
+                withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((103.7 * 0.2) + value.insurance),
+                without: "$103.70"
             },
             total: {
-                withInsurance: ( monthlyFood + ((value.grooming * 53) / 12) + parseInt((55/12).toFixed()) +  parseInt(((103.7 * 0.2) + value.insurance).toFixed())),
-                without: ( monthlyFood + ((value.grooming * 53) / 12) + parseInt((55/12).toFixed()) + 103.7 )
+                withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format( monthlyFood + (annualGrooming / 12) + (55/12) +  ((103.7 * 0.2) + value.insurance)),
+                without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format( monthlyFood + (annualGrooming / 12) + (55/12) + 103.7 )
             }
         };
 
         annual = {
-            food: annualFood,
-            grooming: (value.grooming * 53),
-            toysTreats: 55,
+            food: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(annualFood),
+            grooming: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(annualGrooming),
+            toysTreats: "$55.00",
             medical: {
-                withInsurance: parseInt(((1037 * 0.2) + value.insurance).toFixed()),
-                without: 1037
+                withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(annualMedicalInsurance),
+                without: "$1037.00"
             },
             total: {
-                withInsurance: ( annualFood + (value.grooming * 53) + 55 + parseInt(((1037 * 0.2) + value.insurance).toFixed()) ),
-                without: ( annualFood + (value.grooming * 53) + 55 + 1037 )
+                withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(annualWithInsurance),
+                without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(annualWithout)
             }
         };
 
-        const lifetimeTotalWithInsurance = annual.total.withInsurance * value.lifespan;
-        const lifetimeTotalWithout = annual.total.without * value.lifespan;
-        const lifetimeFood = annual.food * value.lifespan;
-        const lifetimeGrooming = annual.grooming * value.lifespan;
+        const lifetimeTotalWithInsurance = annualWithInsurance * value.lifespan;
+        const lifetimeTotalWithout = annualWithout * value.lifespan;
+        const lifetimeFood = annualFood * value.lifespan;
+        const lifetimeGrooming = annualGrooming * value.lifespan;
         const lifetimeToysTreats = 55 * value.lifespan;
-        const lifeTimeMedicalWithInsurance = (annual.medical.withInsurance * value.lifespan) + 3000;
-        const lifetimeMedicalWithout = (annual.medical.without * value.lifespan) + 3000;
+        const lifeTimeMedicalWithInsurance = annualMedicalInsurance + 3000;
+        const lifetimeMedicalWithout = (1037 * value.lifespan) + 3000;
 
         lifetime = {
             Baby: {
                 total: {
-                    withInsurance: lifetimeTotalWithInsurance + 200,
-                    without: (lifetimeTotalWithout + 200)
+                    withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeTotalWithInsurance + 200),
+                    without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeTotalWithout + 200)
                 },
-                food: lifetimeFood,
-                grooming: lifetimeGrooming,
-                toysTreats: lifetimeToysTreats,
+                food: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeFood),
+                grooming: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeGrooming),
+                toysTreats: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeToysTreats),
                 medical: {
-                    withInsurance: lifeTimeMedicalWithInsurance,
-                    without: lifetimeMedicalWithout
+                    withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifeTimeMedicalWithInsurance),
+                    without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeMedicalWithout)
                 },
-                miscellaneous: (45 * value.lifespan)
+                miscellaneous: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(45 * value.lifespan)
             },
             Young: {
                 total: {
-                    withInsurance: parseInt((lifetimeTotalWithInsurance * 0.75).toFixed()),
-                    without: parseInt((lifetimeTotalWithout * 0.75).toFixed())
+                    withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeTotalWithInsurance * 0.75),
+                    without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeTotalWithout * 0.75)
                 },
-                food: parseInt((lifetimeFood * 0.75).toFixed()),
-                grooming: parseInt((lifetimeGrooming * 0.75).toFixed()),
-                toysTreats: parseInt((lifetimeToysTreats * 0.75).toFixed()),
+                food: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeFood * 0.75),
+                grooming: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeGrooming * 0.75),
+                toysTreats: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeToysTreats * 0.75),
                 medical: {
-                    withInsurance: parseInt((lifeTimeMedicalWithInsurance * 0.75).toFixed()),
-                    without: parseInt((lifetimeMedicalWithout * 0.75).toFixed())
+                    withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifeTimeMedicalWithInsurance * 0.75),
+                    without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeMedicalWithout * 0.75)
                 },
-                miscellaneous: parseInt(((45 * value.lifespan) * 0.75).toFixed())
+                miscellaneous: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((45 * value.lifespan) * 0.75)
             },
             Adult: {
                 total: {
-                    withInsurance: parseInt((lifetimeTotalWithInsurance * 0.5).toFixed()),
-                    without: parseInt((lifetimeTotalWithout * 0.5).toFixed()),
+                    withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeTotalWithInsurance * 0.5),
+                    without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeTotalWithout * 0.5),
                 },
-                food: parseInt((lifetimeFood * 0.5).toFixed()),
-                grooming: parseInt((lifetimeGrooming * 0.5).toFixed()),
-                toysTreats: parseInt((lifetimeToysTreats * 0.5).toFixed()),
+                food: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeFood * 0.5),
+                grooming: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeGrooming * 0.5),
+                toysTreats: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeToysTreats * 0.5),
                 medical: {
-                    withInsurance: parseInt((lifeTimeMedicalWithInsurance * 0.5).toFixed()),
-                    without: parseInt((lifetimeMedicalWithout * 0.5).toFixed())
+                    withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifeTimeMedicalWithInsurance * 0.5),
+                    without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeMedicalWithout * 0.5)
                 },
-                miscellaneous: parseInt(((45 * value.lifespan) * 0.5).toFixed())
+                miscellaneous: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((45 * value.lifespan) * 0.5)
             },
             Senior: {
                 total: {
-                    withInsurance: parseInt((lifetimeTotalWithInsurance * 0.25).toFixed()),
-                    without: parseInt((lifetimeTotalWithout * 0.25).toFixed())
+                    withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeTotalWithInsurance * 0.25),
+                    without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeTotalWithout * 0.25)
                 },
-                food: parseInt((lifetimeFood * 0.25).toFixed()),
-                grooming: parseInt((lifetimeGrooming * 0.25).toFixed()),
-                toysTreats: parseInt((lifetimeToysTreats * 0.25).toFixed()),
+                food: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeFood * 0.25),
+                grooming: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeGrooming * 0.25),
+                toysTreats: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeToysTreats * 0.25),
                 medical: {
-                    withInsurance: parseInt((lifeTimeMedicalWithInsurance * 0.25).toFixed()),
-                    without: parseInt((lifetimeMedicalWithout * 0.25).toFixed())
+                    withInsurance: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifeTimeMedicalWithInsurance * 0.25),
+                    without: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lifetimeMedicalWithout * 0.25)
                 },
-                miscellaneous: parseInt(((45 * value.lifespan) * 0.25).toFixed())
+                miscellaneous: new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format((45 * value.lifespan) * 0.25)
             }
         };
 
