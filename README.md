@@ -1,5 +1,13 @@
 # Paw Prints Backend
 
+|   [**Joseph Rios**](https://github.com/orgs/Paw-Prints/people/josephriosIO)  |    [**Julie Jonak**](https://github.com/juliejonak)    |
+|:----------------:|:----------------:|
+| [<img src="https://avatars2.githubusercontent.com/u/43492172?s=400&v=4" width="80">](https://github.com/orgs/Paw-Prints/people/josephriosIO) | [<img src="https://avatars0.githubusercontent.com/u/41002881?s=460&v=4" width="80">](https://github.com/juliejonak) |
+| [<img src="https://github.com/favicon.ico" width="15"> Github](https://github.com/orgs/Paw-Prints/people/josephriosIO)  | [<img src="https://github.com/favicon.ico" width="15"> Github](https://github.com/juliejonak)  | 
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> LinkedIn](https://www.linkedin.com/in/josephiosdev/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> LinkedIn](https://www.linkedin.com/in/juliejonak/) | 
+
+<br>
+
 The Paw Prints API is deployed with Heroku and can be found [here](https://paw-prints.herokuapp.com/).
 
 [Paw Prints](https://optimistic-brattain-b3415e.netlify.com/) is a web application that helps potential dog adopters locate nearby dogs available for adoption and provides an estimated budget required to adopt. 
