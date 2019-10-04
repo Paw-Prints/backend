@@ -1,12 +1,4 @@
-
-
 // This file exports finalDogInfo, an object containing the calculated estimated costs for each breed
-
-
-// Weight: pounds, food: cups per day, lifespan: years, grooming: times per year, healthIssues: top health defects and their associated cost
-// Food based on this chart: https://www.petmd.com/blogs/nutritionnuggets/dr-coates/2015/july/are-you-feeding-your-dog-right-amount-32905
-
-// Average annual vet cost?
 
 const dogBreeds = {
     "Labrador Retriever": {
